@@ -1,8 +1,8 @@
 
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
+<H3>SAM ISRAEL D</H3>
+<H3>212222230128</H3>
 <H3>EX. NO.4</H3>
-<H3>DATE:</H3>
+<H3>DATE: 16/10/2024</H3>
 <H1 ALIGN =CENTER>Implementation of MLP with Backpropagation for Multiclassification</H1>
 <H3>Aim:</H3>
 To implement a Multilayer Perceptron for Multi classification
@@ -116,11 +116,71 @@ Normalize our dataset.
 
 <H3>Program:</H3> 
 
-Insert your code here
+```
+Name : Sam Israel D
+Reg. No : 212222230128
+```
+<H5>Import Necessary Libraries</H5>
+
+```python
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPClassifier
+from sklearn.metrics import classification_report
+from sklearn.metrics import confusion_matrix
+```
+<H5>Load the Dataset</H5>
+
+```python
+url = 'https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data'
+arr = ['SepalLength', 'SepalWidth', 'PetalLength', 'PetalWidth', 'Species']
+df = pd.read_csv(url, names=arr)
+print(df.head())
+```
+<H5>Split the Dataset into Features and Labels</H5>
+
+```python
+# Features
+x = df.iloc[:, 0:4]
+# Labels
+y = df.iloc[:, 4:5]
+```
+
+<H5>Split the Dataset into Training and Testing Sets</H5>
+
+```python
+training_a, testing_a, training_b, testing_b = train_test_split(x, y, test_size=0.20)
+```
+<H5>Normalize the Dataset</H5>
+
+```python
+myscaler = StandardScaler()
+myscaler.fit(training_a)
+training_a = myscaler.transform(training_a)
+testing_a = myscaler.transform(testing_a)
+```
+<H5>Initialize and Train the MLP Classifier</H5>
+
+```python
+m1 = MLPClassifier(hidden_layer_sizes=(12, 13, 14), activation='relu', solver='adam', max_iter=2500)
+m1.fit(training_a, training_b.values.ravel())
+```
+<H5>Make Predictions</H5>
+
+```python
+predicted_values = m1.predict(testing_a)
+```
+<H5>Evaluate the Classifier</H5>
+
+```python
+print(confusion_matrix(testing_b, predicted_values))
+print(classification_report(testing_b, predicted_values))
+```
 
 <H3>Output:</H3>
 
-Show your results here
+![image](./images/s1.png)
 
 <H3>Result:</H3>
 Thus, MLP is implemented for multi-classification using python.
